@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="RentACarRESTGenNHibernate"
+		                   namespace="RentACarRESTGenNHibernate.EN.RentACarREST">
+		    
+		    
+			
+				<class name="LineaFacturaEN" table="LineaFactura"> 
+				  	
+						<id name="NumLinea" column="numLinea" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Precio" type="double"> 
+						<column name="precio"  not-null="true"/>
+					</property>
+			
+			
+		  			
+						<many-to-one name="Factura" class="RentACarRESTGenNHibernate.EN.RentACarREST.FacturaEN" >	
+								<column name="FK_idFactura_idFactura"/> 
+						</many-to-one>
+											 					
+			
+			
+		  			
+					
+							   <one-to-one name="Reserva" class="RentACarRESTGenNHibernate.EN.RentACarREST.ReservaEN" property-ref="LineaFactura" />							
+					 
+						
+			
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="LineaFacturaENReadAllHQL">from LineaFacturaEN</query>
+		</hibernate-mapping>
+	

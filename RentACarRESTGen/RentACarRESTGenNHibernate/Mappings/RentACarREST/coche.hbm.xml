@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="RentACarRESTGenNHibernate"
+		                   namespace="RentACarRESTGenNHibernate.EN.RentACarREST">
+		    
+		    
+			
+				<class name="CocheEN" table="Coche"> 
+				  	
+						<id name="NumLicencia" column="numLicencia" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Categoria" > 
+						<column name="categoria"  not-null="true"/>
+					</property>
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+			
+			
+		  			
+					
+							   <one-to-one name="Reserva" class="RentACarRESTGenNHibernate.EN.RentACarREST.ReservaEN" property-ref="Coche" />							
+					 
+						
+			
+			
+			
+			
+		  			
+						<bag name="Proveedor" table="[proveedor_coche]" inverse="true" >
+							<key>
+								
+									<column name="FK_numLicencia_idCoche"/> 
+							</key>
+      						<many-to-many class="RentACarRESTGenNHibernate.EN.RentACarREST.ProveedorEN">
+									<column name="FK_idProveedor_idProveedor"/> 
+      						</many-to-many>
+    					</bag>
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="CocheENReadAllHQL">from CocheEN</query>
+		  <query name="CocheENdameCochesDisponiblesHQL"><![CDATA[FROM CocheEN coche where coche.Reserva is empty]]></query>
+		</hibernate-mapping>
+	
